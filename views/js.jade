@@ -1,0 +1,640 @@
+// jQuery
+script(src='../../gentelella/vendors/jquery/dist/jquery.min.js')
+// Bootstrap
+script(src='../../gentelella/vendors/bootstrap/dist/js/bootstrap.min.js')
+// FastClick
+script(src='../../gentelella/vendors/fastclick/lib/fastclick.js')
+// NProgress
+script(src='../../gentelella/vendors/nprogress/nprogress.js')
+// Chart.js
+script(src='../../gentelella/vendors/Chart.js/dist/Chart.min.js')
+// gauge.js
+script(src='../../gentelella/vendors/gauge.js/dist/gauge.min.js')
+// bootstrap-progressbar
+script(src='../../gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js')
+// iCheck
+script(src='../../gentelella/vendors/iCheck/icheck.min.js')
+// Skycons
+script(src='../../gentelella/vendors/skycons/skycons.js')
+// Flot
+script(src='../../gentelella/vendors/Flot/jquery.flot.js')
+script(src='../../gentelella/vendors/Flot/jquery.flot.pie.js')
+script(src='../../gentelella/vendors/Flot/jquery.flot.time.js')
+script(src='../../gentelella/vendors/Flot/jquery.flot.stack.js')
+script(src='../../gentelella/vendors/Flot/jquery.flot.resize.js')
+// Flot plugins
+script(src='../../gentelella/vendors/flot.orderbars/js/jquery.flot.orderBars.js')
+script(src='../../gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js')
+script(src='../../gentelella/vendors/flot.curvedlines/curvedLines.js')
+// DateJS
+script(src='../../gentelella/vendors/DateJS/build/date.js')
+// JQVMap
+script(src='../../gentelella/vendors/jqvmap/dist/jquery.vmap.js')
+script(src='../../gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js')
+script(src='../../gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js')
+// bootstrap-daterangepicker
+script(src='../../gentelella/vendors/moment/min/moment.min.js')
+script(src='../../gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js')
+// morris.js
+// morris.js
+script(src='../../gentelella/vendors/raphael/raphael.min.js')
+script(src='../../gentelella/vendors/morris.js/morris.min.js')
+script(src='../../gentelella/vendors/morris.js/morris.min.js')
+
+// Datatables
+script(src='../../gentelella/vendors/datatables.net/js/jquery.dataTables.min.js')
+script(src='../../gentelella/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')
+script(src='../../gentelella/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')
+script(src='../../gentelella/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')
+script(src='../../gentelella/vendors/datatables.net-buttons/js/buttons.flash.min.js')
+script(src='../../gentelella/vendors/datatables.net-buttons/js/buttons.html5.min.js')
+script(src='../../gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js')
+script(src='../../gentelella/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')
+script(src='../../gentelella/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')
+script(src='../../gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')
+script(src='../../gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')
+script(src='../../gentelella/vendors/datatables.net-scroller/js/datatables.scroller.min.js')
+script(src='../../gentelella/vendors/jszip/dist/jszip.min.js')
+script(src='../../gentelella/vendors/pdfmake/build/pdfmake.min.js')
+script(src='../../gentelella/vendors/pdfmake/build/vfs_fonts.js')
+
+script(type='text/javascript',src='/socket.io/socket.io.js')
+
+// Custom Theme Scripts
+script(src='../../gentelella/build/js/custom.js')
+
+script.
+ $(document).ready(function() {
+     $('#datatable').DataTable();
+    } );
+
+script(type='text/javascript').
+  function formatDate(date){
+
+                 var getnewdate = date.getDate();
+                 var getmonth = date.getMonth()+1;
+                 var gethours = date.getHours();
+                 var getminutes = date.getMinutes();
+                 var getseconds = date.getSeconds();
+                 var newdate,newmonth,newhours,newminutes,newseconds;
+
+                 if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+
+                 if(getmonth < 10){
+                     newmonth = "0"+(getmonth);
+                 }
+                 else{
+                     newmonth = (getmonth);
+                 }
+
+                 if(gethours < 10){
+                     newhours = "0"+gethours;
+                 }
+                 else{
+                     newhours = gethours;
+                 }
+
+                 if(getminutes < 10){
+                     newminutes = "0"+getminutes;
+                 }
+                 else{
+                     newminutes = getminutes;
+                 }
+
+                 if(getseconds < 10){
+                     newseconds = "0"+getseconds;
+                 }
+                 else{
+                     newseconds = getseconds;
+                 }
+               var datetime = newdate + "-"
+                    + newmonth  + "-" 
+                    + date.getFullYear();
+
+            return datetime;
+    } 
+    
+    var temp_dd,hum_dd,air_dd,current_dd,flow_dd,level_dd;
+    var temp_data = document.getElementById("temperature_data").value;
+    var humidity_data = document.getElementById("humidity_data").value;
+    var air_quality_data = document.getElementById("air_quality_data").value;
+    var current_data = document.getElementById("current_data").value;
+    var waterflow_data = document.getElementById("waterflow_data").value;
+    var waterlevel_data = document.getElementById("waterlevel_data").value;
+      //alert(temp_data);
+      if(temp_data!=='undefined'){
+      temp_dd = JSON.parse(temp_data);
+      }
+      
+      if(humidity_data!=='undefined'){
+      hum_dd = JSON.parse(humidity_data);
+      }
+      
+      if(air_quality_data!=='undefined'){
+      air_dd = JSON.parse(air_quality_data);
+      }
+      
+      if(current_data!=='undefined'){
+      current_dd = JSON.parse(current_data);
+      }
+      
+      if(waterflow_data!=='undefined'){
+      flow_dd = JSON.parse(waterflow_data);
+      }
+      
+      if(waterlevel_data!=='undefined'){
+      level_dd = JSON.parse(waterlevel_data);
+      }
+      
+        var date1_temp,date2_temp,date3_temp,date4_temp,date5_temp,date6_temp,date7_temp,date8;
+            
+        var date8_new = new Date(temp_dd[0].year_s+"-"+temp_dd[0].month_s+"-"+temp_dd[0].day_s);
+        //var date8_new = dd[0].day_s+"-"+dd[0].month_s+"-"+dd[0].year_s;
+        date8 = formatDate(date8_new);
+
+        var date7_new = new Date(date8_new.getTime());
+        date7_new.setDate(date8_new.getDate() - 1);
+        date7 = formatDate(date7_new);
+
+        var date6_new = new Date(date7_new.getTime());
+        date6_new.setDate(date7_new.getDate() - 1);
+        date6 = formatDate(date6_new);
+
+        var date5_new = new Date(date6_new.getTime());
+        date5_new.setDate(date6_new.getDate() - 1);
+        date5 = formatDate(date5_new);
+
+        var date4_new = new Date(date5_new.getTime());
+        date4_new.setDate(date5_new.getDate() - 1);
+        date4 = formatDate(date4_new);
+
+        var date3_new = new Date(date4_new.getTime());
+        date3_new.setDate(date4_new.getDate() - 1);
+        date3 = formatDate(date3_new);
+
+        var date2_new = new Date(date3_new.getTime());
+        date2_new.setDate(date3_new.getDate() - 1);
+        date2 = formatDate(date2_new);
+
+        var date1_new = new Date(date2_new.getTime());
+        date1_new.setDate(date2_new.getDate() - 1);
+        date1 = formatDate(date1_new);
+        
+        var temp1_loc2=0;
+        var temp2_loc2=0;
+        var temp3_loc2=0;
+        var temp4_loc2=0;
+        var temp5_loc2=0;
+        var temp6_loc2=0;
+        var temp7_loc2=0;
+        
+        for(var i=0;i<temp_dd.length;i++){
+            
+                 var getnewdate = temp_dd[i].day_s;
+                 var getmonth = temp_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+temp_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    temp1_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date7){
+                    temp2_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date6){
+                    temp3_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date5){
+                    temp4_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date4){
+                    temp5_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date3){
+                    temp6_loc2 = temp_dd[i].avg_temp;
+                }
+                if(nowdate === date2){
+                    temp7_loc2 = temp_dd[i].avg_temp;
+                }
+                
+            }
+  $(document).ready(function() {
+  Morris.Bar({
+        element: 'graph_bar_group1',
+        data: [
+        {"period": date2, "licensed": temp7_loc2.toFixed(2), "sorned": 660},
+        {"period": date3, "licensed": temp6_loc2.toFixed(2), "sorned": 729},
+        {"period": date4, "licensed": temp5_loc2.toFixed(2), "sorned": 1018},
+        {"period": date5, "licensed": temp4_loc2.toFixed(2), "sorned": 1461},
+        {"period": date6, "licensed": temp3_loc2.toFixed(2), "sorned": 1967},
+        {"period": date7, "licensed": temp2_loc2.toFixed(2), "sorned": 2627},
+        {"period": date8, "licensed": temp1_loc2.toFixed(2), "sorned": 3740}
+        ],
+        xkey: 'period',
+        barColors: ['#CE93D8', '#34495E', '#ACADAC', '#3498DB'],
+        ykeys: ['licensed'],
+        labels: ['Temperature', 'SORN'],
+        hideHover: 'auto',
+        xLabelAngle: 60,
+        resize: true
+  });
+  
+  
+        var hum1=0;
+        var hum2=0;
+        var hum3=0;
+        var hum4=0;
+        var hum5=0;
+        var hum6=0;
+        var hum7=0;
+        
+        for(var i=0;i<hum_dd.length;i++){
+            
+                 var getnewdate = hum_dd[i].day_s;
+                 var getmonth = hum_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+hum_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    hum1 = hum_dd[i].avg_humidity;
+                }
+                if(nowdate === date7){
+                    hum2 = hum_dd[i].avg_humidity;
+                }
+                if(nowdate === date6){
+                    hum3 = temp_dd[i].avg_humidity;
+                }
+                if(nowdate === date5){
+                    hum4 = temp_dd[i].avg_humidity;
+                }
+                if(nowdate === date4){
+                    hum5 = temp_dd[i].avg_humidity;
+                }
+                if(nowdate === date3){
+                    hum6 = temp_dd[i].avg_humidity;
+                }
+                if(nowdate === date2){
+                    hum7 = temp_dd[i].avg_humidity;
+                }
+                
+            }
+  Morris.Bar({
+  element: 'graph_bar_group2',
+  data: [
+        {"period": date2, "licensed": hum7.toFixed(2), "sorned": 660},
+        {"period": date3, "licensed": hum6.toFixed(2), "sorned": 729},
+        {"period": date4, "licensed": hum5.toFixed(2), "sorned": 1018},
+        {"period": date5, "licensed": hum4.toFixed(2), "sorned": 1461},
+        {"period": date6, "licensed": hum3.toFixed(2), "sorned": 1967},
+        {"period": date7, "licensed": hum2.toFixed(2), "sorned": 2627},
+        {"period": date8, "licensed": hum1.toFixed(2), "sorned": 3740}
+  ],
+  xkey: 'period',
+  barColors: ['#81D4FA', '#34495E', '#ACADAC', '#3498DB'],
+  ykeys: ['licensed'],
+  labels: ['Humidity', 'SORN'],
+  hideHover: 'auto',
+  xLabelAngle: 60,
+  resize: true
+  });
+  
+  
+        var air1_1=0,air1_2=0;
+        var air2_1=0,air2_2=0;
+        var air3_1=0,air3_2=0;
+        var air4_1=0,air4_2=0;
+        var air5_1=0,air5_2=0;
+        var air6_1=0,air6_2=0;
+        var air7_1=0,air7_2=0;
+        
+        for(var i=0;i<air_dd.length;i++){
+            
+                 var getnewdate = air_dd[i].day_s;
+                 var getmonth = air_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+air_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    air1_1 = air_dd[i].avg_tvoc;
+                    air1_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date7){
+                    air2_1 = air_dd[i].avg_tvoc;
+                    air2_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date6){
+                    air3_1 = air_dd[i].avg_tvoc;
+                    air3_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date5){
+                    air4_1 = air_dd[i].avg_tvoc;
+                    air4_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date4){
+                    air5_1 = air_dd[i].avg_tvoc;
+                    air5_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date3){
+                    air6_1 = air_dd[i].avg_tvoc;
+                    air6_2 = air_dd[i].avg_eco2;
+                }
+                if(nowdate === date2){
+                    air7_1 = air_dd[i].avg_tvoc;
+                    air7_2 = air_dd[i].avg_eco2;
+                }
+                
+            }
+            
+            
+  Morris.Bar({
+  element: 'graph_bar_group3',
+  data: [
+        {"period": date2, "licensed": air7_1.toFixed(2), "sorned": air7_2.toFixed(2)},
+        {"period": date3, "licensed": air6_1.toFixed(2), "sorned": air6_2.toFixed(2)},
+        {"period": date4, "licensed": air5_1.toFixed(2), "sorned": air5_2.toFixed(2)},
+        {"period": date5, "licensed": air4_1.toFixed(2), "sorned": air4_2.toFixed(2)},
+        {"period": date6, "licensed": air3_1.toFixed(2), "sorned": air3_2.toFixed(2)},
+        {"period": date7, "licensed": air2_1.toFixed(2), "sorned": air2_2.toFixed(2)},
+        {"period": date8, "licensed": air1_1.toFixed(2), "sorned": air1_2.toFixed(2)}
+  ],
+  xkey: 'period',
+  barColors: ['#81D4FA', '#34495E', '#ACADAC', '#3498DB'],
+  ykeys: ['licensed','sorned'],
+  labels: ['TVOC', 'eCO2'],
+  hideHover: 'auto',
+  xLabelAngle: 60,
+  resize: true
+  });
+  
+  
+        var curr1=0;
+        var curr2=0;
+        var curr3=0;
+        var curr4=0;
+        var curr5=0;
+        var curr6=0;
+        var curr7=0;
+        
+        for(var i=0;i<current_dd.length;i++){
+            
+                 var getnewdate = current_dd[i].day_s;
+                 var getmonth = current_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+current_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    curr1 = current_dd[i].avg_current;
+                }
+                if(nowdate === date7){
+                    curr2 = current_dd[i].avg_current;
+                }
+                if(nowdate === date6){
+                    curr3 = current_dd[i].avg_current;
+                }
+                if(nowdate === date5){
+                    curr4 = current_dd[i].avg_current;
+                }
+                if(nowdate === date4){
+                    curr5 = current_dd[i].avg_current;
+                }
+                if(nowdate === date3){
+                    curr6 = current_dd[i].avg_current;
+                }
+                if(nowdate === date2){
+                    curr7 = current_dd[i].avg_current;
+                }
+                
+            }
+            
+            
+  Morris.Bar({
+  element: 'graph_bar_group4',
+  data: [
+        {"period": date2, "licensed": curr7.toFixed(2), "sorned": 660},
+        {"period": date3, "licensed": curr6.toFixed(2), "sorned": 729},
+        {"period": date4, "licensed": curr5.toFixed(2), "sorned": 1018},
+        {"period": date5, "licensed": curr4.toFixed(2), "sorned": 1461},
+        {"period": date6, "licensed": curr3.toFixed(2), "sorned": 1967},
+        {"period": date7, "licensed": curr2.toFixed(2), "sorned": 2627},
+        {"period": date8, "licensed": curr1.toFixed(2), "sorned": 3740}
+  ],
+  xkey: 'period',
+  barColors: ['#CE93D8', '#34495E', '#ACADAC', '#3498DB'],
+  ykeys: ['licensed'],
+  labels: ['Power', 'SORN'],
+  hideHover: 'auto',
+  xLabelAngle: 60,
+  resize: true
+  });
+  
+  
+        var flow1=0;
+        var flow2=0;
+        var flow3=0;
+        var flow4=0;
+        var flow5=0;
+        var flow6=0;
+        var flow7=0;
+        
+        for(var i=0;i<flow_dd.length;i++){
+            
+                 var getnewdate = flow_dd[i].day_s;
+                 var getmonth = flow_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+flow_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    flow1 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date7){
+                    flow2 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date6){
+                    flow3 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date5){
+                    flow4 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date4){
+                    flow5 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date3){
+                    flow6 = flow_dd[i].avg_waterflow;
+                }
+                if(nowdate === date2){
+                    flow7 = flow_dd[i].avg_waterflow;
+                }
+                
+            }
+  Morris.Bar({
+  element: 'graph_bar_group5',
+  data: [
+        {"period": date2, "licensed": flow7.toFixed(2), "sorned": 660},
+        {"period": date3, "licensed": flow6.toFixed(2), "sorned": 729},
+        {"period": date4, "licensed": flow5.toFixed(2), "sorned": 1018},
+        {"period": date5, "licensed": flow4.toFixed(2), "sorned": 1461},
+        {"period": date6, "licensed": flow3.toFixed(2), "sorned": 1967},
+        {"period": date7, "licensed": flow2.toFixed(2), "sorned": 2627},
+        {"period": date8, "licensed": flow1.toFixed(2), "sorned": 3740}
+  ],
+  xkey: 'period',
+  barColors: ['#CE93D8', '#34495E', '#ACADAC', '#3498DB'],
+  ykeys: ['licensed'],
+  labels: ['Water Flow', 'SORN'],
+  hideHover: 'auto',
+  xLabelAngle: 60,
+  resize: true
+  });
+  
+  
+        var level1=0;
+        var level2=0;
+        var level3=0;
+        var level4=0;
+        var level5=0;
+        var level6=0;
+        var level7=0;
+        
+        for(var i=0;i<level_dd.length;i++){
+            
+                 var getnewdate = level_dd[i].day_s;
+                 var getmonth = level_dd[i].month_s;
+                 
+                 var newdate,newmonth;
+                if(getnewdate < 10){
+                     newdate = "0"+getnewdate;
+                 }
+                 else{
+                     newdate = getnewdate;
+                 }
+                 
+                 if(getmonth < 10){
+                     newmonth = "0"+getmonth;
+                 }
+                 else{
+                     newmonth = getmonth;
+                 }
+                var nowdate =  newdate+"-"+newmonth+"-"+level_dd[i].year_s;
+                
+                if(nowdate === date8){
+                    level1 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date7){
+                    level2 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date6){
+                    level3 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date5){
+                    level4 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date4){
+                    level5 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date3){
+                    level6 = level_dd[i].avg_waterlevel;
+                }
+                if(nowdate === date2){
+                    level7 = level_dd[i].avg_waterlevel;
+                }
+                
+            }
+  Morris.Bar({
+  element: 'graph_bar_group6',
+  data: [
+        {"period": date2, "licensed": level7.toFixed(2), "sorned": 660},
+        {"period": date3, "licensed": level6.toFixed(2), "sorned": 729},
+        {"period": date4, "licensed": level5.toFixed(2), "sorned": 1018},
+        {"period": date5, "licensed": level4.toFixed(2), "sorned": 1461},
+        {"period": date6, "licensed": level3.toFixed(2), "sorned": 1967},
+        {"period": date7, "licensed": level2.toFixed(2), "sorned": 2627},
+        {"period": date8, "licensed": level1.toFixed(2), "sorned": 3740}
+  ],
+  xkey: 'period',
+  barColors: ['#81D4FA', '#34495E', '#ACADAC', '#3498DB'],
+  ykeys: ['licensed'],
+  labels: ['Water Level', 'SORN'],
+  hideHover: 'auto',
+  xLabelAngle: 60,
+  resize: true
+  });
+  $MENU_TOGGLE.on('click', function() {
+  $(window).resize();
+  });
+  });
+

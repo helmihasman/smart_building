@@ -1,0 +1,30 @@
+extends base
+block content 
+    .right_col(role='main')
+        div
+          .page-title
+            .title_left
+              h3 Humidity
+            .title_right
+              
+          .clearfix
+          .row
+            .col-md-12.col-sm-12.col-xs-12
+              .x_panel
+                .x_title
+                  h2 Humidity
+                  
+                  .clearfix
+                .x_content
+                  table(id="datatable",class="table table-bordered table-striped")
+                    thead
+                      tr
+                        th No
+                        th Humidity
+                        th Time
+                    tbody
+                        for row, index in data
+                            tr
+                                td #{index+1}
+                                td #{row.humidity_val+" %"}
+                                td #{row.humidity_date.toLocaleString()}

@@ -1,0 +1,32 @@
+extends base
+block content 
+    .right_col(role='main')
+        div
+          .page-title
+            .title_left
+              h3 Air Quality
+            .title_right
+              
+          .clearfix
+          .row
+            .col-md-12.col-sm-12.col-xs-12
+              .x_panel
+                .x_title
+                  h2 Air Quality
+                  
+                  .clearfix
+                .x_content
+                  table(id="datatable",class="table table-bordered table-striped")
+                    thead
+                      tr
+                        th No
+                        th TVOC
+                        th eCO2
+                        th Time
+                    tbody
+                        for row, index in data
+                            tr
+                                td #{index+1}
+                                td #{row.air_tvoc+" ppb"}
+                                td #{row.air_eco2+" ppm"}
+                                td #{row.air_date.toLocaleString()}

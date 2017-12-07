@@ -1,0 +1,141 @@
+extends base
+block content 
+    .right_col(role='main')
+        // top tiles
+        .row.top_tiles
+          input(type="text", value="#{JSON.stringify(temperature)}",id="temperature_data",hidden)
+          input(type="text", value="#{JSON.stringify(humidity)}",id="humidity_data",hidden)
+          input(type="text", value="#{JSON.stringify(air_quality)}",id="air_quality_data",hidden)
+          input(type="text", value="#{JSON.stringify(current)}",id="current_data",hidden)
+          input(type="text", value="#{JSON.stringify(waterflow)}",id="waterflow_data",hidden)
+          input(type="text", value="#{JSON.stringify(waterlevel)}",id="waterlevel_data",hidden)
+          script(type='text/javascript',src='/socket.io/socket.io.js')
+          script(type='text/javascript').
+                var socket = io();
+                 socket.on('temperature', function(rows) {
+                     console.log("temperature--"+rows);
+                     document.getElementById("temperature_txt").innerHTML = rows[0].temp_val+"°C";
+
+                 });
+                 
+                 socket.on('humidity', function(rows) {
+                     console.log("humidity--"+rows);
+                     document.getElementById("humidity_txt").innerHTML = rows[0].humidity_val+"%";
+
+                 });
+                 
+                 socket.on('air_quality', function(rows) {
+                     console.log("air_quality--"+rows);
+                     document.getElementById("air_quality_txt").innerHTML = rows[0].air_tvoc+"ppb | "+rows[0].air_eco2+"ppm";
+
+                 });
+                 
+                 socket.on('current', function(rows) {
+                     console.log("current--"+rows);
+                     document.getElementById("current_txt").innerHTML = rows[0].current_val+"kW";
+
+                 });
+                 
+                 socket.on('waterflow', function(rows) {
+                     console.log("waterflow--"+rows);
+                     document.getElementById("waterflow_txt").innerHTML = rows[0].waterflow_val+"m³/s";
+
+                 });
+                 
+                 socket.on('waterlevel', function(rows) {
+                     console.log("waterlevel--"+rows);
+                     document.getElementById("waterlevel_txt").innerHTML = rows[0].waterlevel_val+"%";
+
+                 });
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/thermometer.png', width='55')
+              .count
+                h4 Average Temperature
+                h1(id='temperature_txt') 0°C
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/humidity.png', width='55')
+              .count
+                h4 Average Humidity
+                h1(id='humidity_txt') 0%
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/wind.png', width='55')
+              .count
+                h4 (Average Air Quality) TVOC | eCO2 
+                h1(id='air_quality_txt') 0ppb | 0ppm
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/sensor.png', width='55')
+              .count
+                h4 Average Power
+                h1(id='current_txt') 0kW
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/water.png', width='55')
+              .count
+                h4 Average Water Flow
+                h1(id='waterflow_txt') 0m³/s
+          .col-md-4.col-sm-4.col-xs-12
+            .tile-stats
+              .icon
+                i
+                  img(alt='', height='55', src='/images/level.png', width='55')
+              .count
+                h4 Average Water Level
+                h1(id='waterlevel_txt') 0%
+        // /top tiles
+        .row
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Temperature 
+                .clearfix
+              .x_content1
+                #graph_bar_group1(style='width:100%; height:280px;')
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Humidity 
+                .clearfix
+              .x_content1
+                #graph_bar_group2(style='width:100%; height:280px;')
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Air Quality
+                .clearfix
+              .x_content1
+                #graph_bar_group3(style='width:100%; height:280px;')
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Power
+                .clearfix
+              .x_content1
+                #graph_bar_group4(style='width:100%; height:280px;')
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Water Flow
+                .clearfix
+              .x_content1
+                #graph_bar_group5(style='width:100%; height:280px;')
+          .col-md-6.col-sm-6.col-xs-12
+            .x_panel
+              .x_title
+                h2 Water Level
+                .clearfix
+              .x_content1
+                #graph_bar_group6(style='width:100%; height:280px;')
